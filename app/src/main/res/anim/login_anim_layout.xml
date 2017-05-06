@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layoutAnimation
+    android:delay="10%"
+    android:animationOrder="reverse"
+    android:interpolator="@android:interpolator/decelerate_quint"
+    android:animation="@anim/login_slide_right"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+</layoutAnimation>

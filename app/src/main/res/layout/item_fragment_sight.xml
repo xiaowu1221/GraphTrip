@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_item_sight"
+    android:layout_width="match_parent"
+    android:layout_height="216dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:clipChildren="false">
+
+    <ImageView
+        android:id="@+id/iv_item_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+    <LinearLayout
+        android:id="@+id/ll_item_user_comment"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/trans_color_grey_800"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <com.gp.wu.graphtrip.view.CircleImageView
+                android:id="@+id/civ_item_user_photo"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@mipmap/ic_launcher"
+                app:civ_border_color="@color/cyan_100"
+                app:civ_border_width="2dp"
+                app:civ_fill_color="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_item_user_author"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:singleLine="true"
+                android:text="Hello"
+                android:textColor="@color/cyan_50"
+                android:textSize="@dimen/title" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_item_user_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/grey_100"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textSize="@dimen/caption"
+            android:text="三仙台，是由离岸小岛和珊瑚礁海岸构成的特殊景观区，东海岸最具知名度的风景点。三仙台岛上有造型优美的跨海人行步道桥，长320公尺。三仙台的八拱跨海步桥，波浪造型，岛上散布着海蚀沟、壸穴、海蚀柱、海蚀凹壁等海蚀景观，岩石是黑黝黝我去时天不好，所以景色逊色很多，台东火车站站前有山线观光巴士到达，（东部海岸线）每到一个景点都会停留，供游客游览拍照，"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:id="@+id/tv_item_cnname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/headline"
+            android:text="国立故宫博物院"
+            android:textColor="@color/cyan_100"/>
+        <TextView
+            android:id="@+id/tv_item_enname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/subhead"
+            android:textColor="@color/cyan_50"
+            android:text="National Palace Museum"/>
+    </LinearLayout>
+</RelativeLayout>

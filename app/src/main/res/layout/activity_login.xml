@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg" >
+
+    <LinearLayout
+        android:id="@+id/ll_login"
+        style="@style/LoginLlTheme">
+
+        <ImageView
+            android:id="@+id/iv_login_avatar"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:layout_marginBottom="32dp"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"/>
+
+        <EditText
+            android:id="@+id/et_login_phone"
+            style="@style/LoginEdtTheme"
+            android:hint="手机号"
+            android:inputType="phone"/>
+        <EditText
+            android:id="@+id/et_login_psw"
+            style="@style/LoginEdtTheme"
+            android:hint="密码"
+            android:inputType="textPassword"/>
+        <Button
+            android:id="@+id/btn_login_login"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:textSize="@dimen/subhead"
+            android:textColor="@color/cyan_50"
+            android:text="登录"
+            android:background="@drawable/login_btn_select"/>
+
+        <TextView
+            android:id="@+id/tv_login_to_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="立即注册 > "
+            android:textColor="@color/cyan_100"
+            android:layout_gravity="right"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/body"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_register"
+        style="@style/LoginLlTheme"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/iv_register_avatar"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:layout_marginBottom="32dp"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"/>
+        <EditText
+            android:id="@+id/et_register_nickname"
+            style="@style/LoginEdtTheme"
+            android:hint="昵称"/>
+        <EditText
+            android:id="@+id/et_register_phone"
+            style="@style/LoginEdtTheme"
+            android:hint="手机号"
+            android:inputType="phone"/>
+        <EditText
+            android:id="@+id/et_register_psw"
+            style="@style/LoginEdtTheme"
+            android:hint="密码"
+            android:inputType="textPassword"/>
+        <EditText
+            android:id="@+id/et_register_confirm_psw"
+            style="@style/LoginEdtTheme"
+            android:hint="确认密码"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/btn_register_register"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:textSize="@dimen/subhead"
+            android:textColor="@color/cyan_50"
+            android:text="立即注册"
+            android:background="@drawable/login_btn_select"/>
+        <TextView
+            android:id="@+id/tv_register_to_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="返回登录 > "
+            android:textColor="@color/cyan_100"
+            android:layout_gravity="right"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/body"
+            />
+    </LinearLayout>
+</RelativeLayout>

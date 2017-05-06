@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/cyan_500">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_main"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            app:tabIndicatorColor="@color/cyan_50"
+            app:tabTextColor="@color/cyan_50"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            android:layout_height="match_parent">
+
+        </android.support.design.widget.TabLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/cyan_50"/>
+        <Button
+            android:id="@+id/btn_setting"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:textColor="@color/cyan_50"
+            android:text="囧"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:textSize="@dimen/headline"/>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+</LinearLayout>
