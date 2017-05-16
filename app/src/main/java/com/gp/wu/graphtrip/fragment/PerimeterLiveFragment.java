@@ -54,6 +54,8 @@ public class PerimeterLiveFragment extends BaseFragment {
     private List<PerimeterLiveBean.DataBean.ResBean> resBeanList;
     private PerimeterLiveAdapter liveAdapter;
 
+
+    private Call<PerimeterLiveBean> call;
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_perimeter_live, container, false);
@@ -95,14 +97,14 @@ public class PerimeterLiveFragment extends BaseFragment {
         refresh_view.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener(){
             @Override
             public void onRefresh(boolean isPullDown) {
-                new Handler().postDelayed(new Runnable() {
+                new Handler().post(new Runnable() {
                     @Override
                     public void run() {
                         page = 1;
                         resBeanList.clear();
                         load(true);
                     }
-                }, 0);
+                });
             }
 
             @Override
@@ -129,11 +131,11 @@ public class PerimeterLiveFragment extends BaseFragment {
         Log.i("live_fragment", page + "\n" + "hotel" + "\n" + sightCityId + "\n" + "city" + "\n" + "" + sightAddressBean.getData().getLat() + "\n"
         + sightAddressBean.getData().getLng() + "\n" + "poi" + "\n" + "0" + "\n" +  "maplist");
 
-        Call<PerimeterLiveBean> call = service.getPerimeterLive(map);
+        call = service.getPerimeterLive(map);
         call.enqueue(new Callback<PerimeterLiveBean>() {
             @Override
             public void onResponse(Call<PerimeterLiveBean> call, Response<PerimeterLiveBean> response) {
-                if(response.body().getData().getRes().size() > 0){
+                if(null != response.body().getData().getRes() && response.body().getData().getRes().size() > 0){
                     resBeanList.addAll(response.body().getData().getRes());
                     liveAdapter.notifyDataSetChanged();
                 }else{
@@ -153,5 +155,13 @@ public class PerimeterLiveFragment extends BaseFragment {
                 Log.i("perimeter_live_fragment", call.toString());
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(call != null){
+            call.cancel();
+        }
     }
 }

@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.widget.RelativeLayout;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.gp.wu.graphtrip.R;
 import com.gp.wu.graphtrip.app.MyApplication;
 
@@ -17,8 +16,6 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-import static com.gp.wu.graphtrip.R.id.rl_base;
 
 /**
  * Created by wu on 2017/3/24.
@@ -41,20 +38,13 @@ public abstract class BaseActivity extends AppCompatActivity{
         Log.i("BaseActivity_Create", getClass().getSimpleName());
         setMyContentView(setLayout());
         mUnbinder = ButterKnife.bind(this);
-        initWidget();
         getExtraData();
+        initWidget();
         initData(savedInstanceState);
     }
     protected final void setMyContentView(int layoutResID){
             setContentView(layoutResID);
     }
-//    public void showWhorl(){
-//        Log.i("base_activity", "whorl view");
-//        whorl_view.start();
-//    }
-//    public void dismissWhorl(){
-//        whorl_view.stop();
-//    }
 
     //返回布局id
     public abstract int setLayout();

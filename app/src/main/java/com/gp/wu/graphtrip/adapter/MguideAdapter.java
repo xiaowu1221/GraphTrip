@@ -1,7 +1,10 @@
 package com.gp.wu.graphtrip.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +51,7 @@ public class MguideAdapter extends BaseRecyclerAdapter<MguideAdapter.MguideAdapt
     }
 
     @Override
-    public void onBindViewHolder(MguideAdapterViewHolder holder, final int position, boolean isItem) {
+    public void onBindViewHolder(final MguideAdapterViewHolder holder, final int position, boolean isItem) {
         setAnimation(holder.rl_item_mguide, position);
         final MGuideBean.DataBean.ListBean listBean = listBeanList.get(position);
         GlideUtils.loadImageView(context, listBean.getPhoto(), holder.iv_item_mguide_photo);
@@ -59,7 +62,12 @@ public class MguideAdapter extends BaseRecyclerAdapter<MguideAdapter.MguideAdapt
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MguideDetailActivity.class);
-                context.startActivity(intent);
+                intent.putExtra("url", listBean.getUrl());
+                intent.putExtra("img", listBean.getPhoto());
+                holder.iv_item_mguide_photo.setTransitionName("mguide");
+                Activity activity = (Activity) context;
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.iv_item_mguide_photo, holder.iv_item_mguide_photo.getTransitionName()).toBundle();
+                context.startActivity(intent, bundle);
             }
         });
     }

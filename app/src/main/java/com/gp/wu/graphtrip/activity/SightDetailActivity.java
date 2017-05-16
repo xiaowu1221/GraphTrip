@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import com.gp.wu.graphtrip.R;
 import com.gp.wu.graphtrip.base.BaseActivity;
+import com.gp.wu.graphtrip.bean.MguideDetailBean;
 import com.gp.wu.graphtrip.bean.PlacePoiDetailBean;
 import com.gp.wu.graphtrip.bean.SightAddressBean;
-import com.gp.wu.graphtrip.bean.SightBean;
 import com.gp.wu.graphtrip.net.PlacePoiData;
 import com.gp.wu.graphtrip.net.impl.SightAddressService;
 import com.gp.wu.graphtrip.utils.DensityUtils;
@@ -67,7 +67,7 @@ public class SightDetailActivity extends BaseActivity implements View.OnClickLis
     private String url;
     private String sightCityId;
 
-    private SightBean.DataBean.ListBean listBean;
+    private MguideDetailBean detailBean;
     private SightAddressBean sightAddressBean;
 
     private PopupWindow popupWindow;
@@ -203,17 +203,9 @@ public class SightDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void getExtraData() {
-        if(getIntent().getStringExtra("type").equals("main")){
-            listBean = (SightBean.DataBean.ListBean) getIntent().getSerializableExtra("bean");
-            url = listBean.getUrl();
-            GlideUtils.loadImageView(this, listBean.getPhoto(), iv_sight_detail_photo);
-        }else if(getIntent().getStringExtra("type").equals("fun")){
-            /**
-             * perimeter  fun 跳转
-             */
-            GlideUtils.loadImageView(this, "https://pic.qyer.com/album/user/213/10/Q0hWQxoEZw/index/300_200", iv_sight_detail_photo);
-        }
-
+        detailBean = (MguideDetailBean) getIntent().getSerializableExtra("bean");
+        url = detailBean.getUrl();
+        GlideUtils.loadImageView(this, detailBean.getPhoto(), iv_sight_detail_photo);
     }
 
     @Override
@@ -250,6 +242,14 @@ public class SightDetailActivity extends BaseActivity implements View.OnClickLis
              */
             case R.id.btn_pop_sight_go:
                 dismissPop();
+                if(sightAddressBean != null && sightAddressBean.getData() != null){
+                    Intent intent = new Intent(this, ShowMapActivity.class);
+                    intent.putExtra("lat", sightAddressBean.getData().getLat());
+                    intent.putExtra("lng", sightAddressBean.getData().getLng());
+                    startActivity(intent);
+
+                }
+
                 break;
 
         }
@@ -262,7 +262,7 @@ public class SightDetailActivity extends BaseActivity implements View.OnClickLis
                 .baseUrl("http://place.qyer.com/")
                 .build();
         addressService = retrofit.create(SightAddressService.class);
-        Call<SightAddressBean> call = addressService.getSightAddress(listBean.getId());
+        Call<SightAddressBean> call = addressService.getSightAddress(detailBean.getId());
         call.enqueue(new Callback<SightAddressBean>() {
             @Override
             public void onResponse(Call<SightAddressBean> call, Response<SightAddressBean> response) {

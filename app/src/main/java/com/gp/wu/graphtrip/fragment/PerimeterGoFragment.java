@@ -58,6 +58,8 @@ public class PerimeterGoFragment extends BaseFragment implements View.OnClickLis
     private List<PerimeterGoBean.DataBean.ResBean> resBeanList;
     private PerimeterGoAdapter goAdapter;
     private int orderType = 0;
+
+    private Call<PerimeterCateBean> call;
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_perimeter_go, container, false);
@@ -102,14 +104,14 @@ public class PerimeterGoFragment extends BaseFragment implements View.OnClickLis
         refresh_view.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener(){
             @Override
             public void onRefresh(boolean isPullDown) {
-                new Handler().postDelayed(new Runnable() {
+                new Handler().post(new Runnable() {
                     @Override
                     public void run() {
                         page = 1;
                         resBeanList.clear();
                         load(true, orderType);
                     }
-                }, 0);
+                });
             }
 
             @Override
@@ -122,7 +124,7 @@ public class PerimeterGoFragment extends BaseFragment implements View.OnClickLis
 
     private void getType(){
         service = retrofit.create(SightPerimeterService.class);
-        Call<PerimeterCateBean> call = service.getPerimeterCate();
+        call = service.getPerimeterCate();
         call.enqueue(new Callback<PerimeterCateBean>() {
             @Override
             public void onResponse(Call<PerimeterCateBean> call, Response<PerimeterCateBean> response) {
@@ -181,6 +183,14 @@ public class PerimeterGoFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(call != null){
+            call.cancel();
         }
     }
 }

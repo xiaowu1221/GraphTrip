@@ -52,6 +52,8 @@ public class Demo2Fragment extends BaseFragment{
 
     private List<MGuideBean.DataBean.ListBean> listBeanList;
     private MguideAdapter mguideAdapter;
+
+    private Call<MGuideBean> call;
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_demo_2, container, false);
@@ -115,7 +117,7 @@ public class Demo2Fragment extends BaseFragment{
         map.put("pid", 11);
         map.put("sort", 0);
 
-        Call<MGuideBean> call = mguideService.getMguide(map);
+        call = mguideService.getMguide(map);
         call.enqueue(new Callback<MGuideBean>() {
             @Override
             public void onResponse(Call<MGuideBean> call, Response<MGuideBean> response) {
@@ -186,6 +188,9 @@ public class Demo2Fragment extends BaseFragment{
     public void onDestroy() {
         super.onDestroy();
         Log.i("fragment_demo_onDestroy", TAG);
+        if(call != null){
+            call.cancel();
+        }
     }
 
     @Override

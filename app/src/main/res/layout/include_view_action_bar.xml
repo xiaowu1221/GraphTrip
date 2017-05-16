@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="?android:attr/actionBarSize"
     android:gravity="center">
     <RelativeLayout
         android:id="@+id/rl_back"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/include_action_bar_bg">
+        android:layout_marginLeft="16dp"
+        android:layout_gravity="center">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

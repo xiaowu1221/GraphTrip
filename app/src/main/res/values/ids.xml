@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="note_href" type="id"></item>
+    <item name="note_img" type="id"></item>
+    <item name="note_user_href" type="id"></item>
+</resources>

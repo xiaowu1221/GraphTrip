@@ -59,6 +59,7 @@ public class DemoFragment extends BaseFragment{
     private List<SightBean.DataBean.ListBean> sightBeanList;
     private SightAdapter sightAdapter;
 
+    private Call<SightBean> call;
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -138,7 +139,7 @@ public class DemoFragment extends BaseFragment{
         map.put("rank", 0);
         map.put("action", "list_json");
 
-        Call<SightBean> call = service.getSight(map);
+        call = service.getSight(map);
         call.enqueue(new Callback<SightBean>() {
             @Override
             public void onResponse(Call<SightBean> call, Response<SightBean> response) {
@@ -221,6 +222,9 @@ public class DemoFragment extends BaseFragment{
     public void onDestroy() {
         super.onDestroy();
         Log.i("fragment_demo_onDestroy", TAG);
+        if(call != null){
+            call.cancel();
+        }
     }
 
     @Override

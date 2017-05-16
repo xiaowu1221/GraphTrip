@@ -1,6 +1,10 @@
 package com.gp.wu.graphtrip.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.gp.wu.graphtrip.R;
+import com.gp.wu.graphtrip.activity.NoteDetailActivity;
 import com.gp.wu.graphtrip.bean.TravelNotesBean;
 import com.gp.wu.graphtrip.utils.GlideUtils;
 import com.gp.wu.graphtrip.view.CircleImageView;
@@ -63,9 +67,12 @@ public class TravelNoteAdapter extends BaseRecyclerAdapter<TravelNoteAdapter.Tra
         holder.tv_item_note_msg.setText(notesBean.getNoteReplys() + "");
         holder.tv_item_note_like.setText(notesBean.getNoteLikes() + "");
         holder.tv_item_note_text.setText(notesBean.getNoteText() + "");
+        holder.cv_item_note.setTag(R.id.note_href, notesBean.getNotesHref());
+        holder.cv_item_note.setTag(R.id.note_img, notesBean.getPicSrc());
         holder.cv_item_note.setTag(NOTE_HREF);
         holder.cv_item_note.setOnClickListener(this);
         holder.ll_item_note_user.setTag(NOTE_USER_HREF);
+        holder.ll_item_note_user.setTag(R.id.note_user_href, notesBean.getFaceHref());
         holder.ll_item_note_user.setOnClickListener(this);
     }
 
@@ -77,12 +84,21 @@ public class TravelNoteAdapter extends BaseRecyclerAdapter<TravelNoteAdapter.Tra
     @Override
     public void onClick(View v) {
         int tag = (int) v.getTag();
+
         switch (tag){
             case NOTE_HREF:
-                Toast.makeText(context, "cv_item_note", Toast.LENGTH_SHORT).show();
+                String noteHref = (String) v.getTag(R.id.note_href);
+                String noteImg = (String) v.getTag(R.id.note_img);
+                Intent intent = new Intent(context, NoteDetailActivity.class);
+                intent.putExtra("img", noteImg);
+                intent.putExtra("url", noteHref);
+                getViewHolder(v).iv_item_note_pic.setTransitionName("note");
+                Activity activity = (Activity) context;
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, getViewHolder(v).iv_item_note_pic, getViewHolder(v).iv_item_note_pic.getTransitionName()).toBundle();
+                context.startActivity(intent, bundle);
                 break;
             case NOTE_USER_HREF:
-                Toast.makeText(context, "ll_item_note_user", Toast.LENGTH_SHORT).show();
+                String noteUserHref = (String) v.getTag(R.id.note_user_href);
                 break;
         }
     }

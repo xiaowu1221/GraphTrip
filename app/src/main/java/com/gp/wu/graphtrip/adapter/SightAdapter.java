@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.gp.wu.graphtrip.R;
 import com.gp.wu.graphtrip.activity.SightDetailActivity;
+import com.gp.wu.graphtrip.bean.MguideDetailBean;
 import com.gp.wu.graphtrip.bean.SightBean;
 import com.gp.wu.graphtrip.utils.GlideUtils;
 import com.gp.wu.graphtrip.view.CircleImageView;
@@ -67,18 +68,17 @@ public class SightAdapter extends BaseRecyclerAdapter<SightAdapter.SightAdapterV
         holder.rl_item_sight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MguideDetailBean detailBean = new MguideDetailBean();
+                detailBean.setId(sightBean.getId());
+                detailBean.setCnname(sightBean.getCnname());
+                detailBean.setUrl(sightBean.getUrl());
+                detailBean.setPhoto(sightBean.getPhoto());
                 Intent intent = new Intent(context, SightDetailActivity.class);
-                intent.putExtra("type", "main");
-                intent.putExtra("bean", sightBean);
-//                intent.putExtra("url", sightBean.getUrl());
+                intent.putExtra("bean", detailBean);
                 holder.iv_item_photo.setTransitionName("share");
-                if(context instanceof Activity){
-                    Activity activity = (Activity) context;
-                    Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.iv_item_photo, holder.iv_item_photo.getTransitionName()).toBundle();
-                    context.startActivity(intent, bundle);
-                }else{
-                    context.startActivity(intent);
-                }
+                Activity activity = (Activity) context;
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.iv_item_photo, holder.iv_item_photo.getTransitionName()).toBundle();
+                context.startActivity(intent, bundle);
             }
         });
     }

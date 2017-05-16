@@ -104,11 +104,14 @@ public class Demo3Fragment extends BaseFragment {
                         beanList.addAll(notesBeanList);
                         noteAdapter.notifyDataSetChanged();
                     }
-                    if(isRefresh){
-                        refresh_view.stopRefresh();
-                    }else{
-                        refresh_view.stopLoadMore();
+                    if(null != refresh_view){
+                        if(isRefresh){
+                            refresh_view.stopRefresh();
+                        }else{
+                            refresh_view.stopLoadMore();
+                        }
                     }
+
                 }
             });
         }else{
@@ -122,16 +125,19 @@ public class Demo3Fragment extends BaseFragment {
                         beanList.addAll(notesBeanList);
                         noteAdapter.notifyDataSetChanged();
                     }
-                    if(isRefresh){
-                        refresh_view.stopRefresh();
-                    }else{
-                        refresh_view.stopLoadMore();
+                    if(null != refresh_view){
+                        if(isRefresh){
+                            refresh_view.stopRefresh();
+                        }else{
+                            refresh_view.stopLoadMore();
+                        }
                     }
                 }
             });
         }
 
     }
+
 
 
 
@@ -203,6 +209,7 @@ public class Demo3Fragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         Log.i("fragment_demo_onDestroy", TAG);
+
     }
 
     @Override

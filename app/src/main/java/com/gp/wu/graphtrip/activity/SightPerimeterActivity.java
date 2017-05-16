@@ -68,6 +68,9 @@ public class SightPerimeterActivity extends BaseActivity implements View.OnClick
         eatFragment = new PerimeterEatFragment();
         liveFragment = new PerimeterLiveFragment();
         goFragment = new PerimeterGoFragment();
+        eatFragment.setArguments(bundle);
+        liveFragment.setArguments(bundle);
+        goFragment.setArguments(bundle);
         list.add(eatFragment);
         list.add(liveFragment);
         list.add(goFragment);
@@ -119,9 +122,6 @@ public class SightPerimeterActivity extends BaseActivity implements View.OnClick
     @Override
     public void getExtraData() {
         bundle = getIntent().getBundleExtra("bundle");
-        eatFragment.setArguments(bundle);
-        liveFragment.setArguments(bundle);
-        goFragment.setArguments(bundle);
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.gp.wu.graphtrip.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,21 @@ import android.widget.Toast;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.gp.wu.graphtrip.R;
+import com.gp.wu.graphtrip.activity.SightDetailActivity;
+import com.gp.wu.graphtrip.bean.GoDetailBean;
+import com.gp.wu.graphtrip.bean.MguideDetailBean;
 import com.gp.wu.graphtrip.bean.PerimeterGoBean;
+import com.gp.wu.graphtrip.net.impl.GoDetailService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by wu on 2017/5/3.
@@ -26,7 +40,8 @@ public class PerimeterGoAdapter extends BaseRecyclerAdapter<PerimeterGoAdapter.P
     private List<PerimeterGoBean.DataBean.ResBean> dataBeanList;
     private int lastPosition = -1;
     private Context context;
-
+    private GoDetailBean.DataBean dataBean;
+    private MguideDetailBean detailBean;
 
     public PerimeterGoAdapter(Context context, List<PerimeterGoBean.DataBean.ResBean> dataBeanList){
         this.context = context;
@@ -59,7 +74,42 @@ public class PerimeterGoAdapter extends BaseRecyclerAdapter<PerimeterGoAdapter.P
         holder.btn_perimeter_go_see.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "暂不提供支持" + position, Toast.LENGTH_SHORT).show();
+                getDetail(resBean.getId());
+                Toast.makeText(context, "提示：：：", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getDetail(final String id){
+        detailBean = new MguideDetailBean();
+        GoDetailService goDetailService;
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://place.qyer.com/")
+                .build();
+        goDetailService = retrofit.create(GoDetailService.class);
+        Map<String, Object> map = new HashMap<>();
+        map.put("action", "getDetail");
+        map.put("id", id);
+        map.put("type", "fun");
+        Call<GoDetailBean> call = goDetailService.getGoDetail(map);
+        call.enqueue(new Callback<GoDetailBean>() {
+            @Override
+            public void onResponse(Call<GoDetailBean> call, Response<GoDetailBean> response) {
+                dataBean = response.body().getData();
+                detailBean.setId(id);
+                detailBean.setPhoto(dataBean.getPhoto().get(0));
+                detailBean.setUrl(dataBean.getUrl());
+                detailBean.setCnname(dataBean.getChinesename());
+                detailBean.setDetail(dataBean.getIntroduction());
+                Intent intent = new Intent(context, SightDetailActivity.class);
+                intent.putExtra("bean", detailBean);
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<GoDetailBean> call, Throwable t) {
+                Log.i("perimeter_go_adapter", "fail");
             }
         });
     }

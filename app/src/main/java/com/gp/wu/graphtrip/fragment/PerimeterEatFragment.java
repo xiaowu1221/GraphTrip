@@ -55,6 +55,7 @@ public class PerimeterEatFragment extends BaseFragment {
 
     private List<PerimeterEatBean.DataBean.ResBean> resBeanList;
     private PerimeterEatAdapter eatAdapter;
+    private Call<PerimeterEatBean> call;
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,14 +98,14 @@ public class PerimeterEatFragment extends BaseFragment {
         refresh_view.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener(){
             @Override
             public void onRefresh(boolean isPullDown) {
-                new Handler().postDelayed(new Runnable() {
+                new Handler().post(new Runnable() {
                     @Override
                     public void run() {
                         page = 1;
                         resBeanList.clear();
                         load(true);
                     }
-                }, 0);
+                });
             }
 
             @Override
@@ -131,7 +132,7 @@ public class PerimeterEatFragment extends BaseFragment {
         Log.i("live_fragment", page + "\n" + "food" + "\n" + sightCityId + "\n" + "city" + "\n" + "" + sightAddressBean.getData().getLat() + "\n"
                 + sightAddressBean.getData().getLng() + "\n" + "poi" + "\n" + EAT_CATE_ID + "\n" +  "maplist");
 
-        Call<PerimeterEatBean> call = service.getPerimeterEat(map);
+        call = service.getPerimeterEat(map);
         call.enqueue(new Callback<PerimeterEatBean>() {
             @Override
             public void onResponse(Call<PerimeterEatBean> call, Response<PerimeterEatBean> response) {
@@ -157,5 +158,13 @@ public class PerimeterEatFragment extends BaseFragment {
                 Log.i("perimeter_eat_fragment", "fail");
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(call != null){
+            call.cancel();
+        }
     }
 }
