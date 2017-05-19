@@ -85,6 +85,7 @@ public class SightDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initWidget() {
+        rl_share.setVisibility(View.VISIBLE);
         rl_back.setOnClickListener(this);
         rl_share.setOnClickListener(this);
         ll_sight_detail_address.setOnClickListener(this);

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.wu.graphtrip.R;
@@ -25,7 +26,7 @@ import butterknife.BindView;
  * Created by wu on 2017/5/6.
  */
 
-public class MguideDetailActivity extends BaseActivity{
+public class MguideDetailActivity extends BaseActivity implements View.OnClickListener{
 
     @BindView(R.id.iv_mguide_detail_photo)
     ImageView iv_mguide_detail_photo;
@@ -33,6 +34,10 @@ public class MguideDetailActivity extends BaseActivity{
     TextView tv_mguide_detail_content;
     @BindView(R.id.ll_mguide_detail)
     LinearLayout ll_mguide_detail;
+    @BindView(R.id.rl_back)
+    RelativeLayout rl_back;
+    @BindView(R.id.rl_share)
+    RelativeLayout rl_share;
     private String url;
     private String img;
     @Override
@@ -42,6 +47,8 @@ public class MguideDetailActivity extends BaseActivity{
 
     @Override
     public void initWidget() {
+        rl_share.setVisibility(View.VISIBLE);
+        rl_back.setOnClickListener(this);
         GlideUtils.loadImageView(this, img, iv_mguide_detail_photo);
     }
 
@@ -91,5 +98,14 @@ public class MguideDetailActivity extends BaseActivity{
     public void getExtraData() {
         url = getIntent().getStringExtra("url");
         img = getIntent().getStringExtra("img");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.rl_back:
+                finish();
+                break;
+        }
     }
 }

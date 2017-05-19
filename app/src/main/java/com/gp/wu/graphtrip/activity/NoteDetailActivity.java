@@ -31,7 +31,8 @@ public class NoteDetailActivity extends BaseActivity implements View.OnClickList
     @BindView(R.id.rl_back)
     RelativeLayout rl_back;
 
-
+    @BindView(R.id.rl_share)
+    RelativeLayout rl_share;
     private String url;
     private String img;
     private int imageSize;
@@ -44,6 +45,7 @@ public class NoteDetailActivity extends BaseActivity implements View.OnClickList
     public void initWidget() {
         GlideUtils.loadImageView(this, img, iv_note_detail_pic);
         rl_back.setOnClickListener(this);
+        rl_share.setVisibility(View.VISIBLE);
     }
     private void addView(List<String> data){
         ll_note_detail.removeAllViews();
