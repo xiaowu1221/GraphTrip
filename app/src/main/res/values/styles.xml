@@ -26,6 +26,12 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="NoTitleBarTheme" parent="BaseTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="windowNoTitle">true</item>
@@ -36,7 +42,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:padding">64dp</item>
+        <item name="android:layout_margin">64dp</item>
         <item name="android:gravity">center</item>
         <item name="android:layoutAnimation">@anim/login_anim_layout</item>
     </style>
@@ -50,7 +56,7 @@
         <item name="android:textSize">@dimen/caption</item>
         <item name="android:background">@drawable/login_edt_select</item>
         <item name="android:layout_marginBottom">16dp</item>
-        <item name="android:textColor">@color/grey_800</item>
+        <item name="android:textColor">@color/cyan_300</item>
     </style>
 
     <style name="SightDetailTag">

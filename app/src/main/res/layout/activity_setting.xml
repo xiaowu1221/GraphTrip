@@ -12,10 +12,10 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/iv_item_mguide_photo"
             android:layout_width="match_parent"
             android:layout_height="208dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:background="@drawable/setting_bg"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,6 +24,7 @@
             android:gravity="center_horizontal">
 
             <TextView
+                android:id="@+id/tv_user_nickname"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -31,18 +32,19 @@
                 android:text="Hello" />
 
             <ImageView
-                android:id="@+id/iv_item_mguide_user_photo"
+                android:id="@+id/iv_user_avatar"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="bottom"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
+                android:id="@+id/tv_user_phone"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Hello" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,18 +56,26 @@
             <TextView
                 style="@style/SettingTag"
                 android:text="写游记"
+                android:clickable="true"
+                android:background="@drawable/touchable_background"
                 android:drawableTop="@drawable/ic_travel_note"/>
             <TextView
                 style="@style/SettingTag"
                 android:text="写评论"
+                android:clickable="true"
+                android:background="@drawable/touchable_background"
                 android:drawableTop="@drawable/ic_travel_comment"/>
             <TextView
                 style="@style/SettingTag"
                 android:text="写计划"
+                android:clickable="true"
+                android:background="@drawable/touchable_background"
                 android:drawableTop="@drawable/ic_travel_plan"/>
             <TextView
                 style="@style/SettingTag"
                 android:text="提问题"
+                android:clickable="true"
+                android:background="@drawable/touchable_background"
                 android:drawableTop="@drawable/ic_travel_question"/>
         </LinearLayout>
 
@@ -81,7 +91,27 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="1dp"
                 android:layout_marginTop="1dp"
-                android:background="@color/grey_50">
+                android:clickable="true"
+                android:background="@drawable/touchable_background">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="我的收藏"
+                    android:gravity="center_vertical"/>
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_more"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/touchable_background">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -99,7 +129,8 @@
                 android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="1dp"
-                android:background="@color/grey_50">
+                android:clickable="true"
+                android:background="@drawable/touchable_background">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -117,7 +148,8 @@
                 android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="1dp"
-                android:background="@color/grey_50">
+                android:clickable="true"
+                android:background="@drawable/touchable_background">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -135,7 +167,8 @@
                 android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="1dp"
-                android:background="@color/grey_50">
+                android:clickable="true"
+                android:background="@drawable/touchable_background">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -153,25 +186,8 @@
                 android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="1dp"
-                android:background="@color/grey_50">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="我的收藏"
-                    android:gravity="center_vertical"/>
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_more"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="1dp"
-                android:background="@color/grey_50">
+                android:clickable="true"
+                android:background="@drawable/touchable_background">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

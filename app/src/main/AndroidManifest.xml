@@ -56,6 +56,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.MainActivity"
@@ -65,15 +66,18 @@
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.SightDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.SightPerimeterActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.MguideDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.NoteDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.ShowMapActivity"
