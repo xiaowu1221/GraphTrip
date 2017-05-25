@@ -113,6 +113,7 @@ public class LoginActivity extends BaseActivity{
     @OnClick(R.id.btn_register_register)
 
     public void register(){
+        final ProgressDialog dialog = ProgressDialog.show(this, "", "请稍后...");
         User user = new User();
         username = et_register_phone.getText().toString();
         psw = et_register_psw.getText().toString();
@@ -124,8 +125,8 @@ public class LoginActivity extends BaseActivity{
 
             @Override
             public void done(User user, BmobException e) {
+                dialog.dismiss();
                 if(e == null){
-
                     Log.i("login_register", user.toString());
                 }else{
                     Log.i("login_register", e.getMessage());

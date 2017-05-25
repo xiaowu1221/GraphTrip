@@ -35,8 +35,12 @@ public class SettingActivity extends BaseActivity{
     @Override
     public void initData(Bundle savedInstanceState) {
         User user = BmobUser.getCurrentUser(User.class);
-        tv_user_nickname.setText(user.getNickname());
-        tv_user_phone.setText(user.getMobilePhoneNumber());
+        if(null != user){
+            tv_user_nickname.setText(user.getNickname());
+            tv_user_phone.setText(user.getMobilePhoneNumber());
+        }else{
+
+        }
     }
 
     @Override
