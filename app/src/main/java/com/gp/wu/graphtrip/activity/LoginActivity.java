@@ -85,7 +85,6 @@ public class LoginActivity extends BaseActivity{
 
     @Override
     public void getExtraData() {
-
     }
 
     @OnClick(R.id.btn_login_login)

@@ -2,6 +2,7 @@ package com.gp.wu.graphtrip.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,9 @@ import com.gp.wu.graphtrip.net.PlacePoiData;
 import com.gp.wu.graphtrip.net.impl.SightAddressService;
 import com.gp.wu.graphtrip.utils.DensityUtils;
 import com.gp.wu.graphtrip.utils.GlideUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -263,15 +267,25 @@ public class SightDetailActivity extends BaseActivity implements View.OnClickLis
                 .baseUrl("http://place.qyer.com/")
                 .build();
         addressService = retrofit.create(SightAddressService.class);
-        Call<SightAddressBean> call = addressService.getSightAddress(detailBean.getId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("action", "poijson");
+        map.put("id", detailBean.getId());
+        Log.i(TAG, detailBean.getId());
+        Call<SightAddressBean> call = addressService.getSightAddress(map);
         call.enqueue(new Callback<SightAddressBean>() {
             @Override
             public void onResponse(Call<SightAddressBean> call, Response<SightAddressBean> response) {
+                Log.i(TAG, response.toString());
+                Log.i(TAG, response.message());
+                Log.i(TAG, response.body().getError_code() + "");
+
                 sightAddressBean = response.body();
             }
 
             @Override
             public void onFailure(Call<SightAddressBean> call, Throwable t) {
+                Log.i(TAG, t.toString());
+                Log.i(TAG, t.getMessage());
 
             }
         });

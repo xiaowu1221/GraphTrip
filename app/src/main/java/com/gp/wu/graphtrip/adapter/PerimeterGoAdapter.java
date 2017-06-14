@@ -12,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.gp.wu.graphtrip.R;
@@ -75,7 +74,7 @@ public class PerimeterGoAdapter extends BaseRecyclerAdapter<PerimeterGoAdapter.P
             @Override
             public void onClick(View v) {
                 getDetail(resBean.getId());
-                Toast.makeText(context, "提示：：：", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "提示：：：", Toast.LENGTH_SHORT).show();
             }
         });
     }
